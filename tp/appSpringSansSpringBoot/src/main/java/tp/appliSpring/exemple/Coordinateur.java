@@ -9,7 +9,7 @@ package tp.appliSpring.exemple;
 
 public class Coordinateur {
 	
-	private MonAfficheur monAfficheur; //référence vers afficheur à injecter
+	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
 	
 	
 	public void calculerEtAfficher() {
