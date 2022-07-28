@@ -1,6 +1,8 @@
 package tp.appliSpring.exemple;
 
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -15,9 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class Coordinateur {
 	
-	@Autowired //pour demander à spring d'intialiser la référence monAfficheur
+	@Autowired
+	//pour demander à spring d'intialiser la référence monAfficheur
 	//en pointant sur un composant Spring existant compatible avec le type MonAfficheur
 	@Qualifier("monAfficheurV2") //ou @Qualifier("monAfficheurV1")
+	
+	//@Resource(name="monAfficheurV1")
 	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
 	
 	/*
@@ -41,11 +46,17 @@ public class Coordinateur {
 	}
 	
 	public Coordinateur() {
+		System.out.println("dans le constructeur Coordinateur , monAfficheur="+monAfficheur);
 	}
 
 	public Coordinateur(MonAfficheur monAfficheur) {
 		super();
 		this.monAfficheur = monAfficheur;
+	}
+	
+	@PostConstruct  //ressemble à ngOnInit() de angular
+	public void initialiser() {
+		System.out.println("dans initialiser() prefixée par  @PostConstruct, monAfficheur="+monAfficheur);
 	}
 
 	public void setMonAfficheur(MonAfficheur monAfficheur) {
