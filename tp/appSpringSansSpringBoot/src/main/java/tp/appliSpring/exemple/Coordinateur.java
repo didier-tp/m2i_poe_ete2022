@@ -1,5 +1,8 @@
 package tp.appliSpring.exemple;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 /*
  * objet pris en charge par spring qui va 
  * coordonner :
@@ -7,8 +10,11 @@ package tp.appliSpring.exemple;
  *    - un affichage_du_resultat (délégué à un objet MonAfficheur lui meme en version V1 ou V2)
  */
 
+@Component
 public class Coordinateur {
 	
+	@Autowired //pour demander à spring d'intialiser la référence monAfficheur
+	//en pointant sur un composant Spring existant compatible avec le type MonAfficheur
 	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
 	
 	

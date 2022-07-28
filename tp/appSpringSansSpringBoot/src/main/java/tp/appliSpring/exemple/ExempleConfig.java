@@ -1,6 +1,6 @@
 package tp.appliSpring.exemple;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /*
@@ -8,23 +8,11 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
+@ComponentScan(basePackages = { "tp.appliSpring.exemple" })
 public class ExempleConfig {
-	
-	 @Bean //pour que la chose construite soit prise en charge par Spring
-     public MonAfficheur monAfficheur() {
-    	 //return new MonAfficheurV1();
-    	 //ou bien 
-		 return new MonAfficheurV2();
-     }
+	/*
+	 @ComponentScan() pour demander à spring de parcourir les classes de certains packages
+	 pour y trouver des annotations @Component , @Service , @Autowired à analyser et interpréter
+	 */
 	 
-	 @Bean
-	 public Coordinateur coordinateur(MonAfficheur monAfficheur) {
-		 return new Coordinateur(monAfficheur); //injection par constructeur
-		 /*
-		 //ou bien:
-		 Coordinateur coordinateur = new Coordinateur();
-		 coordinateur.setMonAfficheur(monAfficheur); //injection via setter
-		 return coordinateur;
-		 */
-	 }
 }
