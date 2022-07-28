@@ -17,12 +17,15 @@ public class Coordinateur {
 	//en pointant sur un composant Spring existant compatible avec le type MonAfficheur
 	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
 	
+	@Autowired
+	private MonCalculateur monCalculateur;
 	
 	public void calculerEtAfficher() {
 		//v1 : calcul en direct
 		//v2 : calcul à déléguer à MonCalculateur
 		double x=4;
-		double res = x*x;
+		//double res = x*x;
+		double  res =monCalculateur.calculer(x); //x*x ou bien 2*x ou bien ...
 		monAfficheur.afficher("res="+res);// >> res=16 en v1 ou bien ** res=16
 	}
 	
