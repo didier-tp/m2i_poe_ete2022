@@ -2,7 +2,7 @@ package tp.appliSpring.exemple;
 
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class MonAfficheurV1 implements MonAfficheur {
 
 	public void afficher(String message) {

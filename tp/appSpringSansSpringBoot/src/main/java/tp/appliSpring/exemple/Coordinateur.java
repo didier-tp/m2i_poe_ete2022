@@ -1,6 +1,8 @@
 package tp.appliSpring.exemple;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /*
@@ -15,9 +17,18 @@ public class Coordinateur {
 	
 	@Autowired //pour demander à spring d'intialiser la référence monAfficheur
 	//en pointant sur un composant Spring existant compatible avec le type MonAfficheur
+	@Qualifier("monAfficheurV2") //ou @Qualifier("monAfficheurV1")
 	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
 	
-	@Autowired
+	/*
+	 @Autowired effectue une injection par correspondance de type , si par correspondance de nom besoin complement @Qualifier
+	 @Resource effectue une injection par correspondance de nom (si précisé) , sinon par correpondance de type
+	 @Inject necessite un ajout dans pom.xml et est interprété comme @Autowired
+	 */
+	
+	@Autowired  //annotation specifique spring pour injection de dépendance
+	//@Resource  //vielle annotation standardisée de JEE (simple )
+	//@Inject    //annotation de JEE/DI/CDI (standard plus récent que @Resource mais plus complexe)
 	private MonCalculateur monCalculateur;
 	
 	public void calculerEtAfficher() {

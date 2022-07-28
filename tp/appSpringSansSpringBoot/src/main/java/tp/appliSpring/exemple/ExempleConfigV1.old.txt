@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-public class ExempleConfig {
+public class ExempleConfigV1 {
 	
 	 @Bean //pour que la chose construite soit prise en charge par Spring
      public MonAfficheur monAfficheur() {

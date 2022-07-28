@@ -16,6 +16,12 @@
 		<!-- windows/preferences/general/workspace / UTF8 avec eclipse coherent -->
 	</properties>
 	<dependencies>
+	
+	<dependency>
+    	<groupId>javax.inject</groupId>
+    	<artifactId>javax.inject</artifactId>
+    	<version>1</version>
+	</dependency> <!-- pour que Spring puise interpreter @Inject comme @Autowired -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
