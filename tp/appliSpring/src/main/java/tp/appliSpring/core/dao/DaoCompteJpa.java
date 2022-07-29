@@ -58,4 +58,10 @@ public class DaoCompteJpa implements DaoCompte {
 				           .getResultList();
 	}
 
+	@Override
+	public void deleteById(Long numCpt) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

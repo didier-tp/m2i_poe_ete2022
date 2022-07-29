@@ -27,7 +27,7 @@ public class TestCompteDao {
 	private DaoCompte daoCompte; //à tester
 	
 	@Test
-	public void testAjoutEtRelecture() {
+	public void testAjoutEtRelectureEtSuppression() {
 		//hypothese : base avec tables vides au lancement du test
 		Compte compte = new Compte(null,"compteA",100.0);
 		Compte compteSauvegarde = this.daoCompte.save(compte); //INSERT INTO
@@ -37,6 +37,12 @@ public class TestCompteDao {
 		Assertions.assertEquals("compteA",compteRelu.getLabel());
 		Assertions.assertEquals(100.0,compteRelu.getSolde());
 		logger.info("compteRelu=" + compteRelu);
+		
+		//+supprimer :
+		//...
+		
+		//verifier bien supprimé (en tentant une relecture qui renvoi null)
+		//...
 	}
 
 }
