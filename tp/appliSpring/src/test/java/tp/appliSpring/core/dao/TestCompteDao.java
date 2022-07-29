@@ -28,15 +28,15 @@ public class TestCompteDao {
 	
 	@Test
 	public void testAjoutEtRelecture() {
-		//hypothese : base et table vides au lancement du test
+		//hypothese : base avec tables vides au lancement du test
 		Compte compte = new Compte(null,"compteA",100.0);
 		Compte compteSauvegarde = this.daoCompte.save(compte); //INSERT INTO
-		logger.debug("compteSauvegarde=" + compteSauvegarde);
+		logger.info("compteSauvegarde=" + compteSauvegarde);
 		
 		Compte compteRelu = this.daoCompte.findById(compteSauvegarde.getNumero()); //SELECT
 		Assertions.assertEquals("compteA",compteRelu.getLabel());
 		Assertions.assertEquals(100.0,compteRelu.getSolde());
-		logger.debug("compteRelu=" + compteRelu);
+		logger.info("compteRelu=" + compteRelu);
 	}
 
 }
