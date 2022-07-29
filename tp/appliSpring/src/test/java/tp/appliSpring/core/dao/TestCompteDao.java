@@ -1,5 +1,7 @@
 package tp.appliSpring.core.dao;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +29,18 @@ public class TestCompteDao {
 	private DaoCompte daoCompte; //à tester
 	
 	@Test
+	public void testFindBySoldeMin() {
+		this.daoCompte.save(new Compte(null,"compteC1",100.0));
+		this.daoCompte.save(new Compte(null,"compteC2",-50.0));
+		this.daoCompte.save(new Compte(null,"compteC3",-100.0));
+		this.daoCompte.save(new Compte(null,"compteC4",200.0));
+		this.daoCompte.save(new Compte(null,"compteC5",50.0));
+		List<Compte> comptesSansDecouvert= daoCompte.findBySoldeMin(0);
+		Assertions.assertTrue(comptesSansDecouvert.size()>=3);
+		logger.info("comptesSansDecouvert=" + comptesSansDecouvert);
+	}
+	
+	@Test
 	public void testAjoutEtRelectureEtSuppression() {
 		//hypothese : base avec tables vides au lancement du test
 		Compte compte = new Compte(null,"compteA",100.0);
@@ -39,10 +53,11 @@ public class TestCompteDao {
 		logger.info("compteRelu=" + compteRelu);
 		
 		//+supprimer :
-		//...
+		this.daoCompte.deleteById(compteSauvegarde.getNumero());
 		
 		//verifier bien supprimé (en tentant une relecture qui renvoi null)
-		//...
+		Compte compteReluApresSuppression = this.daoCompte.findById(compteSauvegarde.getNumero()); 
+		Assertions.assertTrue(compteReluApresSuppression == null);
 	}
 
 }

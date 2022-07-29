@@ -59,9 +59,18 @@ public class DaoCompteJpa implements DaoCompte {
 	}
 
 	@Override
+	@Transactional
 	public void deleteById(Long numCpt) {
-		// TODO Auto-generated method stub
+		Compte compteAsupprimer = entityManager.find(Compte.class, numCpt);
+		entityManager.remove(compteAsupprimer);
 		
+	}
+
+	@Override
+	public List<Compte> findBySoldeMin(double soldeMinimum) {
+		return entityManager.createNamedQuery("Compte.findBySoldeMin",Compte.class)
+				   .setParameter(1, soldeMinimum)
+		           .getResultList();
 	}
 
 }

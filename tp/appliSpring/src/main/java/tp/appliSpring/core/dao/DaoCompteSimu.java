@@ -37,8 +37,13 @@ public class DaoCompteSimu implements DaoCompte{
 
 	@Override
 	public void deleteById(Long numCpt) {
+		mapComptes.remove(numCpt);
+	}
+
+	@Override
+	public List<Compte> findBySoldeMin(double soldeMinimum) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }
