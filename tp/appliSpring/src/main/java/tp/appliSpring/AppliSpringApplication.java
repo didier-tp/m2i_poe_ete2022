@@ -14,7 +14,7 @@ public class AppliSpringApplication {
 		SpringApplication.run(AppliSpringApplication.class, args);
 		System.out.println("http://localhost:8080/appliSpring");
 		//http://localhost:8080/appliSpring/index.html
-		//et index.html sera trouvé dans src/main/resources/static
+		// et index.html sera trouvé dans src/main/resources/static
 	}
 
 }
