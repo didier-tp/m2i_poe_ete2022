@@ -21,7 +21,7 @@ public class CoordinateurAvecInjectionParConstructeur {
 	private MonAfficheur monAfficheur=null; //référence vers afficheur à injecter
 	
 	
-	private MonCalculateur monCalculateur;//référence vers calculer à injecter
+	private MonCalculateur monCalculateur;//référence vers calculateur à injecter
 	
 	public void calculerEtAfficher() {
 		//v1 : calcul en direct
@@ -32,7 +32,7 @@ public class CoordinateurAvecInjectionParConstructeur {
 		monAfficheur.afficher("res="+res);// >> res=16 en v1 ou bien ** res=16
 	}
 	
-	
+	//@Autowired facultatif/implicite si un seul constructeur servant à effectuer de l'injection
 	public CoordinateurAvecInjectionParConstructeur(@Qualifier("monAfficheurV1") MonAfficheur monAfficheur,
 			                                        MonCalculateur monCalculateur) {
 		super();
@@ -40,6 +40,13 @@ public class CoordinateurAvecInjectionParConstructeur {
 		this.monCalculateur= monCalculateur;
 		System.out.println("CoordinateurAvecInjectionParConstructeur");
 	}
+
+    /*
+	public CoordinateurAvecInjectionParConstructeur() {
+		super();
+	}
+	*/
+	
 	
 	
      
