@@ -37,7 +37,7 @@ public class TestCompteDao {
 		this.daoCompte.save(new Compte(null,"compteC5",50.0));
 		List<Compte> comptesSansDecouvert= daoCompte.findBySoldeMin(0);
 		Assertions.assertTrue(comptesSansDecouvert.size()>=3);
-		logger.info("comptesSansDecouvert=" + comptesSansDecouvert);
+		logger.debug("comptesSansDecouvert=" + comptesSansDecouvert);
 	}
 	
 	@Test
@@ -45,12 +45,12 @@ public class TestCompteDao {
 		//hypothese : base avec tables vides au lancement du test
 		Compte compte = new Compte(null,"compteA",100.0);
 		Compte compteSauvegarde = this.daoCompte.save(compte); //INSERT INTO
-		logger.info("compteSauvegarde=" + compteSauvegarde);
+		logger.debug("compteSauvegarde=" + compteSauvegarde);
 		
 		Compte compteRelu = this.daoCompte.findById(compteSauvegarde.getNumero()); //SELECT
 		Assertions.assertEquals("compteA",compteRelu.getLabel());
 		Assertions.assertEquals(100.0,compteRelu.getSolde());
-		logger.info("compteRelu=" + compteRelu);
+		logger.debug("compteRelu=" + compteRelu);
 		
 		//+supprimer :
 		this.daoCompte.deleteById(compteSauvegarde.getNumero());

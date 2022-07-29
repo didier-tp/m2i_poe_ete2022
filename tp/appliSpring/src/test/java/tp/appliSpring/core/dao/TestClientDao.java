@@ -26,12 +26,12 @@ public class TestClientDao {
 		//hypothese : base avec tables vides au lancement du test
 		Client client = new Client(null,"alex","Therieur");
 		Client clientSauvegarde = this.daoClient.save(client); //INSERT INTO
-		logger.info("clientSauvegarde=" + clientSauvegarde);
+		logger.debug("clientSauvegarde=" + clientSauvegarde);
 		
 		Client clientRelu = this.daoClient.findById(clientSauvegarde.getNumero()); //SELECT
 		Assertions.assertEquals("alex",clientRelu.getPrenom());
 		Assertions.assertEquals("Therieur",clientRelu.getNom());
-		logger.info("clientRelu=" + clientRelu);
+		logger.debug("clientRelu=" + clientRelu);
 		
 		//+supprimer :
 		this.daoClient.deleteById(clientSauvegarde.getNumero());
