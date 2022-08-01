@@ -34,7 +34,7 @@ public class TestClientDao {
 		Assertions.assertTrue(clientsDeNomTherieur.size()>=2);
 		logger.debug("clientsDeNomTherieur=" + clientsDeNomTherieur);
 		
-		List<Client> clientsDeNomEnT= daoClient.findByNomLike("T%"); //nom commençant pat T
+		List<Client> clientsDeNomEnT= daoClient.findByNomLike("T%"); //nom commençant par T
 		Assertions.assertTrue(clientsDeNomEnT.size()>=3);
 		logger.debug("clientsDeNomEnT=" + clientsDeNomEnT);
 	}

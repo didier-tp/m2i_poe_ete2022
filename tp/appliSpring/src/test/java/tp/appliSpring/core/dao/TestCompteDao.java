@@ -34,8 +34,8 @@ public class TestCompteDao {
 		this.daoCompte.save(new Compte(null,"compteC3",-100.0));
 		this.daoCompte.save(new Compte(null,"compteC4",200.0));
 		this.daoCompte.save(new Compte(null,"compteC5",50.0));
-		//List<Compte> comptesSansDecouvert= daoCompte.findBySoldeMin(0);
-		List<Compte> comptesSansDecouvert= daoCompte.findBySoldeGreaterThanEqual(0.0);
+		List<Compte> comptesSansDecouvert= daoCompte.findBySoldeMin(0);
+		//List<Compte> comptesSansDecouvert= daoCompte.findBySoldeGreaterThanEqual(0.0);
 		Assertions.assertTrue(comptesSansDecouvert.size()>=3);
 		logger.debug("comptesSansDecouvert=" + comptesSansDecouvert);
 	}
