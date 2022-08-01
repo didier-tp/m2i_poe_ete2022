@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import tp.appliSpring.core.entity.Client;
+import tp.appliSpring.core.entity.Compte;
 
 //@ExtendWith(SpringExtension.class) //si junit5/jupiter
 @SpringBootTest(/*classes= {AppliSpringApplication.class}*/)
@@ -19,6 +20,29 @@ public class TestClientDao {
 	
 	@Autowired
 	private DaoClient daoClient; //à tester
+	
+	@Autowired
+	private DaoCompte daoCompte; //pour aider à écrire le test
+	
+	@Test
+	public void testFindClientByIdWithComptes() {
+		Client client1 = new Client(null,"luc","Dupond");
+		client1.getComptes().add(this.daoCompte.save(new Compte(null,"compteC1a",100.0)));
+		client1.getComptes().add(this.daoCompte.save(new Compte(null,"compteC1b",50.0)));
+		client1 = daoClient.save(client1);
+		
+		Client client2 = new Client(null,"jean","Durand");
+		client2.getComptes().add(this.daoCompte.save(new Compte(null,"compteC2a",80.0)));
+		client2.getComptes().add(this.daoCompte.save(new Compte(null,"compteC2b",60.0)));
+		client2 = daoClient.save(client2);
+		
+		Client client1avecSesComptes = this.daoClient.findClientByIdWithComptes(client1.getNumero());
+		logger.debug("client1avecSesComptes="+client1avecSesComptes);
+		for(Compte compte : client1avecSesComptes.getComptes())
+			logger.debug("\t"+compte);
+		Assertions.assertEquals("Dupond", client1avecSesComptes.getNom());
+		Assertions.assertTrue(client1avecSesComptes.getComptes().size()==2);
+	}
 	
 	@Test
 	public void testFindByNom() {
