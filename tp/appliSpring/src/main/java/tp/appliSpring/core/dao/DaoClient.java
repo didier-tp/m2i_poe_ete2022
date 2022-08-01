@@ -2,11 +2,12 @@ package tp.appliSpring.core.dao;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import tp.appliSpring.core.entity.Client;
 
-public interface DaoClient  extends JpaRepository<Client,Long>{
+//public interface DaoClient  extends JpaRepository<Client,Long>{
+public interface DaoClient  extends CrudRepository<Client,Long>{
 	
 	//methodes heritees: findById() retourne le client mais sans les comptes (mode LAZY)
          

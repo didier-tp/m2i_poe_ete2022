@@ -36,6 +36,7 @@ public class TestClientDao {
 		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2b",60.0)));
 		client2 = daoClient.save(client2);
 		
+		//Client client1sansSesComptes = this.daoClient.findById(client1.getNumero()).get();
 		Client client1avecSesComptes = this.daoClient.findClientByIdWithComptes(client1.getNumero());
 		logger.debug("client1avecSesComptes="+client1avecSesComptes);
 		for(Compte compte : client1avecSesComptes.getComptes())
