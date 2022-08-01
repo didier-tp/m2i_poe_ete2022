@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import tp.appliSpring.core.entity.Client;
 
 public interface DaoClient  extends JpaRepository<Client,Long>{
+	
+	//methodes heritees: findById() retourne le client mais sans les comptes (mode LAZY)
          
 	//méthodes de recherche spécifiques aux Clients
 	//qui respectent des conventions de nommage (code des requetes généré automatiquement)
@@ -14,4 +16,8 @@ public interface DaoClient  extends JpaRepository<Client,Long>{
     List<Client> findByNomIgnoreCase(String nom);
     List<Client> findByNomOrderByPrenom(String nom);
     List<Client> findByNomLike(String motifNom); //motifNom = T% pour rechercher personne avec nom qui commence par T
+    
+    //methodes spécifiques (avec requetes codées en @NamedQuery ou @Query)
+    Client findClientByIdWithComptes(Long numClient);
+    //...
 }
