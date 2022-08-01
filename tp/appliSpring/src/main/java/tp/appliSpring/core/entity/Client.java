@@ -31,7 +31,12 @@ public class Client {
 	@JoinTable(name = "CLIENT_COMPTE" ,
 	           joinColumns = { @JoinColumn(name="numClient") } ,
 	           inverseJoinColumns = { @JoinColumn(name="numCompte") } )
-	private List<Compte> comptes = new ArrayList<>(); //ou bien new dans methode addCompte() 
+	private List<Compte> comptes; /* = new ArrayList<>();*/ //ou bien new dans methode addCompte() 
+	
+	public void addCompte(Compte compte) {
+		if(this.comptes == null) this.comptes =new ArrayList<>();
+		this.comptes.add(compte);
+	}
 	
 	public Client() {
 		super();

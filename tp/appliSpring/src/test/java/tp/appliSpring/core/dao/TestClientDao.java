@@ -27,13 +27,13 @@ public class TestClientDao {
 	@Test
 	public void testFindClientByIdWithComptes() {
 		Client client1 = new Client(null,"luc","Dupond");
-		client1.getComptes().add(this.daoCompte.save(new Compte(null,"compteC1a",100.0)));
-		client1.getComptes().add(this.daoCompte.save(new Compte(null,"compteC1b",50.0)));
+		client1.addCompte(this.daoCompte.save(new Compte(null,"compteC1a",100.0)));
+		client1.addCompte(this.daoCompte.save(new Compte(null,"compteC1b",50.0)));
 		client1 = daoClient.save(client1);
 		
 		Client client2 = new Client(null,"jean","Durand");
-		client2.getComptes().add(this.daoCompte.save(new Compte(null,"compteC2a",80.0)));
-		client2.getComptes().add(this.daoCompte.save(new Compte(null,"compteC2b",60.0)));
+		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2a",80.0)));
+		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2b",60.0)));
 		client2 = daoClient.save(client2);
 		
 		Client client1avecSesComptes = this.daoClient.findClientByIdWithComptes(client1.getNumero());
