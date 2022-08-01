@@ -24,8 +24,6 @@ public class TestCompteDao {
     private static Logger logger = LoggerFactory.getLogger(TestCompteDao.class);
 	
 	@Autowired
-	//@Qualifier("simu")
-	@Qualifier("jpa")
 	private DaoCompte daoCompte; //à tester
 	
 	@Test
@@ -47,7 +45,7 @@ public class TestCompteDao {
 		Compte compteSauvegarde = this.daoCompte.save(compte); //INSERT INTO
 		logger.debug("compteSauvegarde=" + compteSauvegarde);
 		
-		Compte compteRelu = this.daoCompte.findById(compteSauvegarde.getNumero()); //SELECT
+		Compte compteRelu = this.daoCompte.findById(compteSauvegarde.getNumero()).get(); //SELECT
 		Assertions.assertEquals("compteA",compteRelu.getLabel());
 		Assertions.assertEquals(100.0,compteRelu.getSolde());
 		logger.debug("compteRelu=" + compteRelu);
@@ -56,7 +54,7 @@ public class TestCompteDao {
 		this.daoCompte.deleteById(compteSauvegarde.getNumero());
 		
 		//verifier bien supprimé (en tentant une relecture qui renvoi null)
-		Compte compteReluApresSuppression = this.daoCompte.findById(compteSauvegarde.getNumero()); 
+		Compte compteReluApresSuppression = this.daoCompte.findById(compteSauvegarde.getNumero()).orElse(null); 
 		Assertions.assertTrue(compteReluApresSuppression == null);
 	}
 

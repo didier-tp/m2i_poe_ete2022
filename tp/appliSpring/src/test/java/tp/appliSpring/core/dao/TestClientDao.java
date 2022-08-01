@@ -28,7 +28,7 @@ public class TestClientDao {
 		Client clientSauvegarde = this.daoClient.save(client); //INSERT INTO
 		logger.debug("clientSauvegarde=" + clientSauvegarde);
 		
-		Client clientRelu = this.daoClient.findById(clientSauvegarde.getNumero()); //SELECT
+		Client clientRelu = this.daoClient.findById(clientSauvegarde.getNumero()).get(); //SELECT
 		Assertions.assertEquals("alex",clientRelu.getPrenom());
 		Assertions.assertEquals("Therieur",clientRelu.getNom());
 		logger.debug("clientRelu=" + clientRelu);
@@ -37,7 +37,7 @@ public class TestClientDao {
 		this.daoClient.deleteById(clientSauvegarde.getNumero());
 		
 		//verifier bien supprimé (en tentant une relecture qui renvoi null)
-		Client clientReluApresSuppression = this.daoClient.findById(clientSauvegarde.getNumero()); 
+		Client clientReluApresSuppression = this.daoClient.findById(clientSauvegarde.getNumero()).orElse(null); 
 		Assertions.assertTrue(clientReluApresSuppression == null);
 	}
 
