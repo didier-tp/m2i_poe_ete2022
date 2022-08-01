@@ -1,5 +1,7 @@
 package tp.appliSpring.core.dao;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +22,18 @@ public class TestClientDao {
 	
 	@Autowired
 	private DaoClient daoClient; //à tester
+	
+	@Test
+	public void testFindByNom() {
+		this.daoClient.save(new Client(null,"alex","Therieur"));
+		this.daoClient.save(new Client(null,"alain","Therieur"));
+		this.daoClient.save(new Client(null,"jean","Bon"));
+		this.daoClient.save(new Client(null,"axelle","Aire"));
+
+		List<Client> clientsDeNomTherieur= daoClient.findByNom("Therieur");
+		Assertions.assertTrue(clientsDeNomTherieur.size()>=2);
+		logger.debug("clientsDeNomTherieur=" + clientsDeNomTherieur);
+	}
 	
 	@Test
 	public void testAjoutEtRelectureEtSuppression() {

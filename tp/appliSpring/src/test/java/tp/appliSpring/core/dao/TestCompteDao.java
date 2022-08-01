@@ -26,6 +26,7 @@ public class TestCompteDao {
 	@Autowired
 	private DaoCompte daoCompte; //à tester
 	
+	/*
 	@Test
 	public void testFindBySoldeMin() {
 		this.daoCompte.save(new Compte(null,"compteC1",100.0));
@@ -36,7 +37,7 @@ public class TestCompteDao {
 		List<Compte> comptesSansDecouvert= daoCompte.findBySoldeMin(0);
 		Assertions.assertTrue(comptesSansDecouvert.size()>=3);
 		logger.debug("comptesSansDecouvert=" + comptesSansDecouvert);
-	}
+	}*/
 	
 	@Test
 	public void testAjoutEtRelectureEtSuppression() {
