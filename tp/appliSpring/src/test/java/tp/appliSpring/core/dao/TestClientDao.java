@@ -4,18 +4,15 @@ import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import tp.appliSpring.AppliSpringApplication;
 import tp.appliSpring.core.entity.Client;
 
-@ExtendWith(SpringExtension.class) //si junit5/jupiter
-@SpringBootTest(classes= {AppliSpringApplication.class})
+//@ExtendWith(SpringExtension.class) //si junit5/jupiter
+@SpringBootTest(/*classes= {AppliSpringApplication.class}*/)
 public class TestClientDao {
 	
     private static Logger logger = LoggerFactory.getLogger(TestClientDao.class);
@@ -29,10 +26,17 @@ public class TestClientDao {
 		this.daoClient.save(new Client(null,"alain","Therieur"));
 		this.daoClient.save(new Client(null,"jean","Bon"));
 		this.daoClient.save(new Client(null,"axelle","Aire"));
+		this.daoClient.save(new Client(null,"tarte","Tatin"));
 
-		List<Client> clientsDeNomTherieur= daoClient.findByNom("Therieur");
+		//List<Client> clientsDeNomTherieur= daoClient.findByNom("Therieur");
+		//List<Client> clientsDeNomTherieur= daoClient.findByNomIgnoreCase("therieur");
+		List<Client> clientsDeNomTherieur= daoClient.findByNomOrderByPrenom("Therieur");
 		Assertions.assertTrue(clientsDeNomTherieur.size()>=2);
 		logger.debug("clientsDeNomTherieur=" + clientsDeNomTherieur);
+		
+		List<Client> clientsDeNomEnT= daoClient.findByNomLike("T%"); //nom commençant pat T
+		Assertions.assertTrue(clientsDeNomEnT.size()>=3);
+		logger.debug("clientsDeNomEnT=" + clientsDeNomEnT);
 	}
 	
 	@Test
