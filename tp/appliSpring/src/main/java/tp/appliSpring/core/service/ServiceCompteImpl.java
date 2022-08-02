@@ -3,13 +3,13 @@ package tp.appliSpring.core.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import tp.appliSpring.core.dao.DaoClient;
 import tp.appliSpring.core.dao.DaoCompte;
 import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
+import tp.appliSpring.core.exception.SoldeInsuffisantException;
 
 @Service //@Service = @Component de type service métier
 //@Transactional //en placant @Transactional sur le haut de la classe = bonne pratique , on évite des oublis 
@@ -59,6 +59,9 @@ public class ServiceCompteImpl implements ServiceCompte {
 			Compte cptDeb = this.daoCompte.findById(numCptDeb).get(); //le dao exécute son code dans la grande transaction
 			//commencée par le service sans la fermer et l'objet cptDeb remonte à l'état persistant
 			
+			if(cptDeb.getSolde() < montant)
+				throw new SoldeInsuffisantException("compte a débiter qui a un solde insuffisant : " + cptDeb);
+			
 			cptDeb.setSolde(cptDeb.getSolde() - montant);
 			//this.daoCompte.save(cptDeb); //appel de .save() possible et dans ce cas base modifiée temporairement seulement
 			                               //avec rollback ultérieur possible en cas d'exception
@@ -71,7 +74,7 @@ public class ServiceCompteImpl implements ServiceCompte {
 			//en fin de transaction réussie (sans exception) , toutes les modification effectuées sur les objets
 			//à l'état persistant seront répercutées en base (.save() automatiques)
 		} catch (Exception e) {
-			throw new RuntimeException("echec virement" , e); //rollback se fait de façon fiable
+			throw new RuntimeException("echec virement " + e.getMessage() , e); //rollback se fait de façon fiable
 			//ou bien throw new ClasseExceptionPersonnaliseeHeritanttDeRuntimeException("echec virement" , e);
 		}
 	}

@@ -98,7 +98,7 @@ public class TestServiceCompte {
 		logger.debug("avant virement, soldeA_avant="+soldeA_avant + " et soldeB_avant=" + soldeB_avant);
 		//effectuer un virement de 50 euros d'un compte A vers vers compte B
 		try {
-			this.serviceCompte.effectuerVirement(50.0, numCptA, -numCptB); //erreur volotaire
+			this.serviceCompte.effectuerVirement(50.0, numCptA, -numCptB); //erreur volontaire
 		} catch (Exception e) {
 			logger.error("echec normal du virement " + e.getMessage());
 		}

@@ -15,7 +15,6 @@ public class SoldeInsuffisantException extends RuntimeException {
 
 	public SoldeInsuffisantException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	public SoldeInsuffisantException(String message, Throwable cause, boolean enableSuppression,
