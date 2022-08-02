@@ -66,10 +66,17 @@ public class ServiceCompteImpl implements ServiceCompte {
 			//this.daoCompte.save(cptDeb); //appel de .save() possible et dans ce cas base modifiée temporairement seulement
 			                               //avec rollback ultérieur possible en cas d'exception
 			
+			//A faire en TP:
+			Operation opDebit = new Operation(null,-montant,"debit lie au virement",new Date(),cptDeb);
+			daoOperation.save(opDebit);
+			
+			
 			//idem pour compte à créditer
 			Compte cptCred= this.daoCompte.findById(numCptCred).get();
 			cptCred.setSolde(cptCred.getSolde() + montant);
-			//this.daoCompte.save(cptCred);
+			//this.daoCompte.save(cptCred)
+
+			//idem pour operation credit
 			
 			//en fin de transaction réussie (sans exception) , toutes les modification effectuées sur les objets
 			//à l'état persistant seront répercutées en base (.save() automatiques)
