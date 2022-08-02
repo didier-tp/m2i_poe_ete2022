@@ -13,6 +13,8 @@ import tp.appliSpring.core.entity.Compte;
 
 public interface ServiceCompte {
 	Compte rechercherCompteParNumero(long numCompte);
+	Compte rechercherCompteAvecOperationsParNumero(long numCompte);
+	
 	List<Compte> rechercherComptesPourClient(long numClient);
 	//...
 	void supprimerCompte(long numCompte);

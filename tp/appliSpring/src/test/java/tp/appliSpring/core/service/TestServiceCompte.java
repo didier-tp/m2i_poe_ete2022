@@ -72,15 +72,21 @@ public class TestServiceCompte {
 		//remonte en memoire les anciens soldes des compte A et B avant virement (+affichage console ou logger)
 		double soldeA_avant= compteASauvegarde.getSolde();
 		double soldeB_avant = compteBSauvegarde.getSolde();
-		logger.debug("avant virement, soldeA_avant="+soldeA_avant + " et soldeB_avant=" + soldeB_avant);
+		logger.debug("avant bon virement, soldeA_avant="+soldeA_avant + " et soldeB_avant=" + soldeB_avant);
 		//effectuer un virement de 50 euros d'un compte A vers vers compte B
 		this.serviceCompte.effectuerVirement(50.0, numCptA, numCptB);
 		//remonte en memoire les nouveaux soldes des compte A et B apres virement (+affichage console ou logger)
+		/*
 		Compte compteAReluApresVirement = this.serviceCompte.rechercherCompteParNumero(numCptA);
 		Compte compteBReluApresVirement = this.serviceCompte.rechercherCompteParNumero(numCptB);
+		*/
+		Compte compteAReluApresVirement = this.serviceCompte.rechercherCompteAvecOperationsParNumero(numCptA);
+		Compte compteBReluApresVirement = this.serviceCompte.rechercherCompteAvecOperationsParNumero(numCptB);
 		double soldeA_apres = compteAReluApresVirement.getSolde();
 		double soldeB_apres = compteBReluApresVirement.getSolde();
-		logger.debug("apres virement, soldeA_apres="+soldeA_apres + " et soldeB_apres=" + soldeB_apres);
+		logger.debug("apres bon virement, soldeA_apres="+soldeA_apres + " et soldeB_apres=" + soldeB_apres);
+		logger.debug("apres bon virement, operations sur compte A: "+compteAReluApresVirement.getOperations());
+		logger.debug("apres bon virement, operations sur compte B: "+compteBReluApresVirement.getOperations());
 		//verifier -50 et +50 sur les différences de soldes sur A et B
 		Assertions.assertEquals(soldeA_avant - 50, soldeA_apres,0.000001);
 		Assertions.assertEquals(soldeB_avant + 50, soldeB_apres,0.000001);
@@ -95,7 +101,7 @@ public class TestServiceCompte {
 		//remonte en memoire les anciens soldes des compte A et B avant virement (+affichage console ou logger)
 		double soldeA_avant= compteASauvegarde.getSolde();
 		double soldeB_avant = compteBSauvegarde.getSolde();
-		logger.debug("avant virement, soldeA_avant="+soldeA_avant + " et soldeB_avant=" + soldeB_avant);
+		logger.debug("avant mauvais virement, soldeA_avant="+soldeA_avant + " et soldeB_avant=" + soldeB_avant);
 		//effectuer un virement de 50 euros d'un compte A vers vers compte B
 		try {
 			this.serviceCompte.effectuerVirement(50.0, numCptA, -numCptB); //erreur volontaire
@@ -107,7 +113,7 @@ public class TestServiceCompte {
 		Compte compteBReluApresVirement = this.serviceCompte.rechercherCompteParNumero(numCptB);
 		double soldeA_apres = compteAReluApresVirement.getSolde();
 		double soldeB_apres = compteBReluApresVirement.getSolde();
-		logger.debug("apres virement, soldeA_apres="+soldeA_apres + " et soldeB_apres=" + soldeB_apres);
+		logger.debug("apres mauvais virement, soldeA_apres="+soldeA_apres + " et soldeB_apres=" + soldeB_apres);
 		//verifier -50 et +50 sur les différences de soldes sur A et B
 		Assertions.assertEquals(soldeA_avant , soldeA_apres,0.000001);
 		Assertions.assertEquals(soldeB_avant , soldeB_apres,0.000001);

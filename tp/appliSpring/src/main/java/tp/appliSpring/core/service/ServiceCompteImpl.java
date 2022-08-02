@@ -38,6 +38,11 @@ public class ServiceCompteImpl implements ServiceCompte {
 		return daoCompte.findById(numCompte).orElse(null); //ou bien .get() ou bien ..
 	}
 	
+	@Override
+	public Compte rechercherCompteAvecOperationsParNumero(long numCompte) {
+		return daoCompte.findCompteByIdWithOperations(numCompte);
+	}
+	
 	
 	//sans @Transactional
 	public void effectuerVirementSansTransaction(double montant, long numCptDeb, long numCptCred) {
@@ -119,6 +124,6 @@ public class ServiceCompteImpl implements ServiceCompte {
 			throw new RuntimeException("cannot update not existing compte :" + compte.toString());
 	}
 
-	
+
 	
 }

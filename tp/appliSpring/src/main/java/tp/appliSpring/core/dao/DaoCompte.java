@@ -6,6 +6,7 @@ import javax.persistence.NamedQuery;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
 
 public interface DaoCompte extends JpaRepository<Compte,Long>{
@@ -21,5 +22,8 @@ public interface DaoCompte extends JpaRepository<Compte,Long>{
    //mais peut tout de même être codée via 
    //@NamedQuery(name="Compte.findBySoldeMin", query="SELECT c FROM Compte c WHERE c.solde >= ?1")
    //au dessus de la classe Compte
+   
+   //methodes spécifiques (avec requetes codées en @NamedQuery ou @Query)
+   Compte findCompteByIdWithOperations(Long numCompte);
    
 }
