@@ -1,1 +1,0 @@
-A FAIRE : interface DaoOperation héritant de JpaRepository

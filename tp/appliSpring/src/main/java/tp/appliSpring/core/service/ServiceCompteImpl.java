@@ -1,5 +1,6 @@
 package tp.appliSpring.core.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -7,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tp.appliSpring.core.dao.DaoClient;
 import tp.appliSpring.core.dao.DaoCompte;
+import tp.appliSpring.core.dao.DaoOperation;
 import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
+import tp.appliSpring.core.entity.Operation;
 import tp.appliSpring.core.exception.SoldeInsuffisantException;
 
 @Service //@Service = @Component de type service métier
@@ -16,15 +19,18 @@ import tp.appliSpring.core.exception.SoldeInsuffisantException;
 public class ServiceCompteImpl implements ServiceCompte {
 	//à compléter
 	
-	private DaoCompte daoCompte; //dépendance à injecter
+	private DaoCompte daoCompte; //dépendance principale à injecter
 	
 	private DaoClient daoClient; //dépendance à injecter
 	
+	private DaoOperation daoOperation; //dépendance à injecter
+	
 	/* @Autowired */
-	public ServiceCompteImpl(DaoCompte daoCompte,DaoClient daoClient){
+	public ServiceCompteImpl(DaoCompte daoCompte,DaoClient daoClient,DaoOperation daoOperation){
 		//injection possible via constructeur (comme angular)
 		this.daoCompte = daoCompte;
 		this.daoClient = daoClient;
+		this.daoOperation= daoOperation;
 	}
 
 	@Override
@@ -66,7 +72,7 @@ public class ServiceCompteImpl implements ServiceCompte {
 			//this.daoCompte.save(cptDeb); //appel de .save() possible et dans ce cas base modifiée temporairement seulement
 			                               //avec rollback ultérieur possible en cas d'exception
 			
-			//A faire en TP:
+			//On enregistre une trace du virement du coté débit :
 			Operation opDebit = new Operation(null,-montant,"debit lie au virement",new Date(),cptDeb);
 			daoOperation.save(opDebit);
 			
@@ -76,7 +82,9 @@ public class ServiceCompteImpl implements ServiceCompte {
 			cptCred.setSolde(cptCred.getSolde() + montant);
 			//this.daoCompte.save(cptCred)
 
-			//idem pour operation credit
+			//On enregistre une trace du virement du coté crédit :
+			Operation opCredit = new Operation(null,montant,"credit lie au virement",new Date(),cptCred);
+			daoOperation.save(opCredit);
 			
 			//en fin de transaction réussie (sans exception) , toutes les modification effectuées sur les objets
 			//à l'état persistant seront répercutées en base (.save() automatiques)
