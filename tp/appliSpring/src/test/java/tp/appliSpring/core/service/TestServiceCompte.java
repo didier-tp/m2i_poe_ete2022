@@ -1,5 +1,7 @@
 package tp.appliSpring.core.service;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import tp.appliSpring.core.dao.DaoClient;
+import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
 
 @ExtendWith(SpringExtension.class) //si junit5/jupiter
@@ -23,7 +27,9 @@ public class TestServiceCompte {
 	@Autowired
 	private ServiceCompte serviceCompte; //à tester
 	
-	//...
+	@Autowired
+	private DaoClient daoClient; //pour aider à tester
+	//private ServiceClient ServiceClient; //pour aider à tester
 	
 	@Test
 	public void testRechercherCompteParNumero() {
@@ -36,6 +42,25 @@ public class TestServiceCompte {
 		Assertions.assertEquals(100.0,compteRelu.getSolde());
 		logger.debug("compteRelu=" + compteRelu);
 		
+	}
+	
+	@Test
+	public void testRechercherComptesPourClient() {
+		Client client1 = new Client(null,"luc","Dupond");
+		client1.addCompte(this.serviceCompte.sauvegarderNouveauCompte(new Compte(null,"compteC1a",100.0)));
+		client1.addCompte(this.serviceCompte.sauvegarderNouveauCompte(new Compte(null,"compteC1b",50.0)));
+		client1 = daoClient.save(client1);
+		
+		Client client2 = new Client(null,"jean","Durand");
+		client2.addCompte(this.serviceCompte.sauvegarderNouveauCompte(new Compte(null,"compteC2a",80.0)));
+		client2.addCompte(this.serviceCompte.sauvegarderNouveauCompte(new Compte(null,"compteC2b",60.0)));
+		client2 = daoClient.save(client2);
+		
+		List<Compte> comptesDuClient1 = this.serviceCompte.rechercherComptesPourClient(client1.getNumero());	
+		logger.debug("comptesDuClient1:"+comptesDuClient1);
+        Assertions.assertTrue(comptesDuClient1.get(0).getLabel().equals("compteC1a")
+        		             || comptesDuClient1.get(0).getLabel().equals("compteC1b"));
+		Assertions.assertTrue(comptesDuClient1.size()==2);
 	}
 	
 	@Test
@@ -56,7 +81,7 @@ public class TestServiceCompte {
 		double soldeA_apres = compteAReluApresVirement.getSolde();
 		double soldeB_apres = compteBReluApresVirement.getSolde();
 		logger.debug("apres virement, soldeA_apres="+soldeA_apres + " et soldeB_apres=" + soldeB_apres);
-		//verfier -50 et +50 sur les différences de soldes sur A et B
+		//verifier -50 et +50 sur les différences de soldes sur A et B
 		Assertions.assertEquals(soldeA_avant - 50, soldeA_apres,0.000001);
 		Assertions.assertEquals(soldeB_avant + 50, soldeB_apres,0.000001);
 	}

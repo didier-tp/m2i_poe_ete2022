@@ -8,7 +8,7 @@ import tp.appliSpring.core.entity.Compte;
  ServiceCompte = interface d'un service métier
  avec: méthodes CRUD déléguées au DAO
        méthodes spécifiques au métier (virement, verifierPasDecouvert,...)
-       exceptions qui remotent en cas de problème (héritant de RuntimeException)
+       exceptions qui remontent en cas de problème (héritant de RuntimeException)
  */
 
 public interface ServiceCompte {
