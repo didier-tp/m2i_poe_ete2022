@@ -43,7 +43,7 @@ public class ServiceCompteImpl implements ServiceCompte {
 		return daoCompte.findCompteByIdWithOperations(numCompte);
 	}
 	
-	
+	/*
 	//sans @Transactional
 	public void effectuerVirementSansTransaction(double montant, long numCptDeb, long numCptCred) {
 	
@@ -61,10 +61,11 @@ public class ServiceCompteImpl implements ServiceCompte {
 		cptCred.setSolde(cptCred.getSolde() + montant);
 		this.daoCompte.save(cptCred);
 	}
+	*/
 	
-	@Override
+	
 	@Transactional(/*propagation = Propagation.REQUIRED*/) //REQUIRED par defaut
-	public void effectuerVirement(double montant, long numCptDeb, long numCptCred) {
+	public void effectuerVirementV1(double montant, long numCptDeb, long numCptCred) {
 		try {
 			// transaction globale initialisée dès le début de l'exécution de effectuerVirement
 			Compte cptDeb = this.daoCompte.findById(numCptDeb).get(); //le dao exécute son code dans la grande transaction
@@ -93,6 +94,54 @@ public class ServiceCompteImpl implements ServiceCompte {
 			
 			//en fin de transaction réussie (sans exception) , toutes les modification effectuées sur les objets
 			//à l'état persistant seront répercutées en base (.save() automatiques)
+		} catch (Exception e) {
+			throw new RuntimeException("echec virement " + e.getMessage() , e); //rollback se fait de façon fiable
+			//ou bien throw new ClasseExceptionPersonnaliseeHeritanttDeRuntimeException("echec virement" , e);
+		}
+	}
+	
+	@Transactional(/*propagation = Propagation.REQUIRED*/) //REQUIRED par defaut
+	public void debiterCompte(double montant, long numCptDeb) {
+		try {
+			
+			Compte cptDeb = this.daoCompte.findById(numCptDeb).get(); 
+			if(cptDeb.getSolde() < montant)
+				throw new SoldeInsuffisantException("compte a débiter qui a un solde insuffisant : " + cptDeb);
+			
+			cptDeb.setSolde(cptDeb.getSolde() - montant);
+			
+			//On enregistre une trace du virement du coté débit :
+			Operation opDebit = new Operation(null,-montant,"debit lie au virement",new Date(),cptDeb);
+			daoOperation.save(opDebit);
+			
+		} catch (Exception e) {
+			throw new RuntimeException("echec debiter " + e.getMessage() , e); //rollback se fait de façon fiable
+			//ou bien throw new ClasseExceptionPersonnaliseeHeritanttDeRuntimeException("echec debit" , e);
+		}
+	}
+	
+	@Transactional(/*propagation = Propagation.REQUIRED*/) //REQUIRED par defaut
+	public void crediterCompte(double montant, long numCptCred) {
+		try {
+			Compte cptCred= this.daoCompte.findById(numCptCred).get();
+			cptCred.setSolde(cptCred.getSolde() + montant);
+			//this.daoCompte.save(cptCred)
+
+			//On enregistre une trace du virement du coté crédit :
+			Operation opCredit = new Operation(null,montant,"credit lie au virement",new Date(),cptCred);
+			daoOperation.save(opCredit);
+		} catch (Exception e) {
+			throw new RuntimeException("echec crediter " + e.getMessage() , e); //rollback se fait de façon fiable
+			//ou bien throw new ClasseExceptionPersonnaliseeHeritanttDeRuntimeException("echec crediter" , e);
+		}
+	}
+	
+	@Override
+	@Transactional(/*propagation = Propagation.REQUIRED*/) //REQUIRED par defaut
+	public void effectuerVirement(double montant, long numCptDeb, long numCptCred) {
+		try {
+			this.debiterCompte(montant, numCptDeb);
+			this.crediterCompte(montant, numCptCred);
 		} catch (Exception e) {
 			throw new RuntimeException("echec virement " + e.getMessage() , e); //rollback se fait de façon fiable
 			//ou bien throw new ClasseExceptionPersonnaliseeHeritanttDeRuntimeException("echec virement" , e);
