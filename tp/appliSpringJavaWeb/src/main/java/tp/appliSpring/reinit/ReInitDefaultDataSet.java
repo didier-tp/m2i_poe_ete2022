@@ -23,12 +23,12 @@ public class ReInitDefaultDataSet {
 	
 	@PostConstruct
 	public void initDataSet() {
-		Client client1 = new Client(null,"luc","Dupond");
+		Client client1 = new Client(null,"alain","Therieur");
 		client1.addCompte(this.daoCompte.save(new Compte(null,"compteC1a",100.0)));
 		client1.addCompte(this.daoCompte.save(new Compte(null,"compteC1b",50.0)));
 		client1 = daoClient.save(client1);
 		
-		Client client2 = new Client(null,"jean","Durand");
+		Client client2 = new Client(null,"axelle","Aire");
 		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2a",80.0)));
 		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2b",60.0)));
 		client2 = daoClient.save(client2);

@@ -21,7 +21,12 @@ public class ClientController {
 	}
 	
 	@RequestMapping("/verifLogin")
-	public String verifLogin(Model model,@RequestParam(name="numClient") Long numClient) {
+	public String verifLogin(Model model,@RequestParam(name="numClient",required =false ) Long numClient) {
+		if(numClient == null) {
+			model.addAttribute("message", "numClient doit être une valeur numerique (1 ou 2 ou ...)");
+			return "login"; //si rien de saisie , on réinvite à mieux saisir
+		}
+		
 		Client clientAvecSesComptes = serviceClient.rechercherClientAvecComptesByNum(numClient);
 		model.addAttribute("client", clientAvecSesComptes);
 		return "clientComptes"; //pour demander la vue jsp/clientComptes.jsp
