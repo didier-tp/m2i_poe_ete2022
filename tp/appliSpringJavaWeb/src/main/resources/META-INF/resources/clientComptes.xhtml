@@ -11,8 +11,24 @@
 </h:head>
 <h:body>
 	<h3>clientComptes.xhtml (jsf)</h3>
-	<h:outputText value="#{clientBean.client.prenom}" />&nbsp;
-	<h:outputText value="#{clientBean.client.nom}" />
+	${clientBean.client.prenom} &nbsp;
+	${clientBean.client.nom}
+	
+	<br/>
+	<h:dataTable border="1" var="c"  value="#{clientBean.client.comptes}">
+	    <h:column>
+	      <f:facet name="header">numero</f:facet>
+	      <h:outputText value="#{c.numero}" />
+	    </h:column>
+	    <h:column>
+	      <f:facet name="header">label</f:facet>
+	      <h:outputText value="#{c.label}" />
+	    </h:column>
+	    <h:column>
+	      <f:facet name="header">solde</f:facet>
+	      <h:outputText value="#{c.solde}" />
+	    </h:column>
+	</h:dataTable>
 	
 </h:body>
 
