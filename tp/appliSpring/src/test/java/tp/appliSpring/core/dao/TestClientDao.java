@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import tp.appliSpring.core.dao.DaoClient;
+import tp.appliSpring.core.dao.DaoCompte;
 import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
 

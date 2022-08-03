@@ -14,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import tp.appliSpring.AppliSpringApplication;
+import tp.appliSpring.core.dao.DaoCompte;
 import tp.appliSpring.core.entity.Compte;
 
 
