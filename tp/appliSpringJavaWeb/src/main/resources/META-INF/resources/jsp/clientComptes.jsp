@@ -14,5 +14,6 @@ nom: ${client.nom} <br/>
           </tr>
        </c:forEach>
    </table>
+   <p> <a href="virement" >nouveau virement</a> </p>
 </body>
 </html>

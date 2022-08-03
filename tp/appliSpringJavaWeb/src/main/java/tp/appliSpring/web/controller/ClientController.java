@@ -20,6 +20,12 @@ public class ClientController {
 		return "login"; //pour demander la vue jsp/login.jsp
 	}
 	
+	@RequestMapping("/virement")
+	public String versVirement(Model model) {
+		return "virement"; //pour demander la vue jsp/virement.jsp
+	}
+	
+	
 	@RequestMapping("/verifLogin")
 	public String verifLogin(Model model,@RequestParam(name="numClient",required =false ) Long numClient) {
 		if(numClient == null) {
