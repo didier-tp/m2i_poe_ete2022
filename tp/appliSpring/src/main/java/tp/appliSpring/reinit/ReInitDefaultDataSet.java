@@ -1,5 +1,7 @@
 package tp.appliSpring.reinit;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.stereotype.Component;
 
 import tp.appliSpring.core.dao.DaoClient;
 import tp.appliSpring.core.dao.DaoCompte;
+import tp.appliSpring.core.dao.DaoOperation;
 import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
+import tp.appliSpring.core.entity.Operation;
 
 @Component
 @Profile("reInit")
@@ -21,10 +25,16 @@ public class ReInitDefaultDataSet {
 	@Autowired
 	private DaoClient daoClient;
 	
+	@Autowired
+	private DaoOperation daoOperation;
+	
 	@PostConstruct
 	public void initDataSet() {
 		Client client1 = new Client(null,"luc","Dupond");
-		client1.addCompte(this.daoCompte.save(new Compte(null,"compteC1a",100.0)));
+		Compte compteC1a = this.daoCompte.save(new Compte(null,"compteC1a",100.0));
+		Operation op1CompteC1a = new Operation(null,-50.0,"achat courses" , new Date() ,compteC1a );
+		daoOperation.save(op1CompteC1a);
+		client1.addCompte(compteC1a);
 		client1.addCompte(this.daoCompte.save(new Compte(null,"compteC1b",50.0)));
 		client1 = daoClient.save(client1);
 		
