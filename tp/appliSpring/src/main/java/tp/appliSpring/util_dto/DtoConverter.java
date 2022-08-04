@@ -7,11 +7,15 @@ import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.dto.CompteEssentiel;
 
 public class DtoConverter {
+	
+	public static CompteEssentiel compteToCompteEssentiel(Compte compte) {
+		return new CompteEssentiel(compte.getNumero(),compte.getLabel(),compte.getSolde());
+	}
 
 	public static List<CompteEssentiel> comptesToComptesEssentiels(List<Compte> comptes){
 		List<CompteEssentiel> comptesEssentiels = new ArrayList<>();
 		for(Compte compte : comptes) {
-			comptesEssentiels.add(new CompteEssentiel(compte.getNumero(),compte.getLabel(),compte.getSolde()));
+			comptesEssentiels.add(compteToCompteEssentiel(compte));
 		}
 		return comptesEssentiels;
 	}

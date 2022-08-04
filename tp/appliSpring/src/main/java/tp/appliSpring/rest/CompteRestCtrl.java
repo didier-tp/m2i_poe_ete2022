@@ -25,9 +25,7 @@ public class CompteRestCtrl {
 	//URL: http://localhost:8080/appliSpring/api-bank/compte/1
 	@GetMapping("/{numero}")
 	public CompteEssentiel getCompteByNum(@PathVariable("numero")Long num) {
-		Compte compte = serviceCompte.rechercherCompteParNumero(num);
-		CompteEssentiel compteEssentiel = new CompteEssentiel(compte.getNumero(),compte.getLabel(),compte.getSolde());
-		return compteEssentiel;
+		return DtoConverter.compteToCompteEssentiel( serviceCompte.rechercherCompteParNumero(num));
 	}
 	
 	//URL:      http://localhost:8080/appliSpring/api-bank/compte
