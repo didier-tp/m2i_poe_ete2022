@@ -14,12 +14,19 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Entity
 @Table(name="COMPTE")
 @NamedQueries({
    @NamedQuery(name="Compte.findBySoldeMin", query="SELECT c FROM Compte c WHERE c.solde >= ?1"),
    @NamedQuery(name="Compte.findCompteByIdWithOperations", query="SELECT c FROM Compte c LEFT JOIN FETCH c.operations WHERE c.numero = ?1")
 })
+@Getter @Setter
+@NoArgsConstructor 
 public class Compte {
 
     @Id
@@ -36,11 +43,7 @@ public class Compte {
     
   //+get/set , constructeur , toString()
     
-	@Override
-	public String toString() {
-		return "Compte [numero=" + numero + ", label=" + label + ", solde=" + solde + "]";
-	}
-
+	
 
 	public Compte(Long numero, String label, Double solde) {
 		super();
@@ -49,49 +52,16 @@ public class Compte {
 		this.solde = solde;
 	}
 
-
-	public Compte() {
-		super();
+	@Override
+	public String toString() {
+		return "Compte [numero=" + numero + ", label=" + label + ", solde=" + solde + "]";
 	}
+
 	
 
 
     //+get/set , constructeur , toString()
 
 
-	public Long getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Long numero) {
-		this.numero = numero;
-	}
-
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	public Double getSolde() {
-		return solde;
-	}
-
-	public void setSolde(Double solde) {
-		this.solde = solde;
-	}
-
-
-	public List<Operation> getOperations() {
-		return operations;
-	}
-
-
-	public void setOperations(List<Operation> operations) {
-		this.operations = operations;
-	}
-	
 	
 }

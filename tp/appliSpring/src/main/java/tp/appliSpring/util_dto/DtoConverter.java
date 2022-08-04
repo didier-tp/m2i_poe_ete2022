@@ -1,12 +1,12 @@
 package tp.appliSpring.util_dto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 
 import tp.appliSpring.core.entity.Compte;
+import tp.appliSpring.dto.CompteDetaille;
 import tp.appliSpring.dto.CompteEssentiel;
 
 public class DtoConverter {
@@ -32,6 +32,13 @@ public class DtoConverter {
 		BeanUtils.copyProperties(compte, compteEssentiel);//recopie de source vers destination 
 		                                               //toutes les propriétés/attributs de mêmes noms
 		return compteEssentiel;
+	}
+	
+	
+	public static CompteDetaille compteToCompteDetaille(Compte compte) {
+		CompteDetaille compteDetaille= new CompteDetaille();
+		BeanUtils.copyProperties(compte, compteDetaille);
+		return compteDetaille;
 	}
 	
 	public static Compte compteEssentielToCompte(CompteEssentiel compteEssentiel) {

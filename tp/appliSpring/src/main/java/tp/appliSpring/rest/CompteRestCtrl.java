@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tp.appliSpring.core.entity.Compte;
 import tp.appliSpring.core.service.ServiceCompte;
+import tp.appliSpring.dto.CompteDetaille;
 import tp.appliSpring.dto.CompteEssentiel;
 import tp.appliSpring.util_dto.DtoConverter;
 
@@ -28,6 +29,12 @@ public class CompteRestCtrl {
 	@GetMapping("/{numero}")
 	public CompteEssentiel getCompteByNum(@PathVariable("numero")Long num) {
 		return DtoConverter.compteToCompteEssentiel( serviceCompte.rechercherCompteParNumero(num));
+	}
+	
+	//URL: http://localhost:8080/appliSpring/api-bank/compte/avecDetails/1
+	@GetMapping("/avecDetails/{numero}")
+	public CompteDetaille getCompteDetailleByNum(@PathVariable("numero")Long num) {
+			return DtoConverter.compteToCompteDetaille( serviceCompte.rechercherCompteAvecOperationsParNumero(num));
 	}
 	
 	//URL:      http://localhost:8080/appliSpring/api-bank/compte

@@ -49,7 +49,7 @@ public class Operation {
 	@Override
 	public String toString() {
 		return "Operation [numOp=" + numOp + ", montant=" + montant + ", label=" + label + ", dateOp=" + dateOp
-				+ ", compte=" + compte.getNumero() + "]";
+				+ ", compte=" + compte + "]";
 	}
 
 

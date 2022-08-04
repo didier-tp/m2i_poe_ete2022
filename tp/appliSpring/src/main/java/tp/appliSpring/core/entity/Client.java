@@ -13,10 +13,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name="CLIENT")
 @NamedQuery(name = "Client.findClientByIdWithComptes",
             query = "SELECT c FROM Client c LEFT JOIN FETCH c.comptes WHERE c.numero = ?1")
+@Getter @Setter
+@NoArgsConstructor 
 public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +44,8 @@ public class Client {
 		this.comptes.add(compte);
 	}
 	
-	public Client() {
-		super();
-	}
+	
+	
 	
 	public Client(Long numero, String prenom, String nom) {
 		super();
@@ -48,47 +53,14 @@ public class Client {
 		this.prenom = prenom;
 		this.nom = nom;
 	}
-	
 
-	
+
+
+
 	@Override
 	public String toString() {
 		return "Client [numero=" + numero + ", prenom=" + prenom + ", nom=" + nom + "]";
 	}
-
-	public Long getNumero() {
-		return numero;
-	}
-
-
-
-	public void setNumero(Long numero) {
-		this.numero = numero;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public List<Compte> getComptes() {
-		return comptes;
-	}
-
-	public void setComptes(List<Compte> comptes) {
-		this.comptes = comptes;
-	}
-
+	
 	
 }
