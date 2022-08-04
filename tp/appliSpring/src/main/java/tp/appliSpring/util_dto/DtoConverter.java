@@ -33,6 +33,12 @@ public class DtoConverter {
 		                                               //toutes les propriétés/attributs de mêmes noms
 		return compteEssentiel;
 	}
+	
+	public static Compte compteEssentielToCompte(CompteEssentiel compteEssentiel) {
+		Compte compte= new Compte();
+		BeanUtils.copyProperties(compteEssentiel, compte);
+		return compte;
+	}
 
 	public static List<CompteEssentiel> comptesToComptesEssentiels(List<Compte> comptes){
 		/*
