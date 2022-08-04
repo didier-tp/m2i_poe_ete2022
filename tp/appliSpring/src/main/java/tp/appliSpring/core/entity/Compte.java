@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="COMPTE")
 @NamedQueries({
@@ -28,6 +30,7 @@ public class Compte {
     
     private Double solde;
     
+    @JsonIgnore
     @OneToMany(mappedBy="compte")
     private List<Operation> operations = new ArrayList<>(); //avec get/set
     
