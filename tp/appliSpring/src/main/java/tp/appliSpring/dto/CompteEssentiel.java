@@ -1,5 +1,12 @@
 package tp.appliSpring.dto;
 
+/*
+ * DRY : Don't Repeat Yoursef
+ * KISS : Keep It Simple Stupid
+ * --------
+ * KISS or SLAP
+ */
+
 //CompteEssentiel = une version simple de DTO
 //DTO = Data Transfert Object (objet de données transféréré d'une couche logicielle à une autre 
 //ou bien d'une application à une autre )
