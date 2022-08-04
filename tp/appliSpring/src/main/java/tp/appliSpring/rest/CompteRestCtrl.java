@@ -42,6 +42,7 @@ public class CompteRestCtrl {
 	
 	// http://localhost:8080/appliSpring/api-bank/compte appelée en mode POST
 	//avec { "numero" : null , "label" : "CompteXy" , "solde" : 50.0 }
+	// ou bien  {  "label" : "CompteXy" , "solde" : 50.0 }
 	// à tester avec PostMan ou bien un équivalent
 	@PostMapping("")
 	public CompteEssentiel postCompte(@RequestBody CompteEssentiel compteEssentiel) {
