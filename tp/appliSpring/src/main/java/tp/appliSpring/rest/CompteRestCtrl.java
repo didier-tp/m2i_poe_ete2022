@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,5 +38,15 @@ public class CompteRestCtrl {
         	 return DtoConverter.comptesToComptesEssentiels(serviceCompte.rechercherComptesPourClient(numClient));
          else
         	 return DtoConverter.comptesToComptesEssentiels(serviceCompte.rechercherTousLesComptes());
+	}
+	
+	// http://localhost:8080/appliSpring/api-bank/compte appelée en mode POST
+	//avec { "numero" : null , "label" : "CompteXy" , "solde" : 50.0 }
+	@PostMapping("")
+	public CompteEssentiel postCompte(@RequestBody CompteEssentiel compteEssentiel) {
+		Compte compteSauvegarde = serviceCompte.sauvegarderNouveauCompte(
+				                 DtoConverter.compteEssentielToCompte(compteEssentiel));
+		return DtoConverter.compteToCompteEssentiel(compteSauvegarde);
+		//on retourne le compte avec son numero auto-incrémenté
 	}
 }
