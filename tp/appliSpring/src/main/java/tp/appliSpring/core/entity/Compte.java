@@ -30,7 +30,7 @@ public class Compte {
     
     private Double solde;
     
-    @JsonIgnore
+    //@JsonIgnore est techniquement possible ici mais c'est mieux sur un DTO
     @OneToMany(mappedBy="compte")
     private List<Operation> operations = new ArrayList<>(); //avec get/set
     
