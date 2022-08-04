@@ -173,6 +173,11 @@ public class ServiceCompteImpl implements ServiceCompte {
 			throw new RuntimeException("cannot update not existing compte :" + compte.toString());
 	}
 
+	@Override
+	public List<Compte> rechercherTousLesComptes() {
+		return daoCompte.findAll();
+	}
+
 
 	
 }

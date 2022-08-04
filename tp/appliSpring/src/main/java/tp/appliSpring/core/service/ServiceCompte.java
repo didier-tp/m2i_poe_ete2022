@@ -23,4 +23,5 @@ public interface ServiceCompte {
 	
 	void effectuerVirement(double montant,long numCptDeb , long numCptCred);
 	//...
+	List<Compte> rechercherTousLesComptes();
 }
