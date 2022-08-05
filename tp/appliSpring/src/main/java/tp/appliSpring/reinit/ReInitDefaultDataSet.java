@@ -13,7 +13,9 @@ import tp.appliSpring.core.dao.DaoCompte;
 import tp.appliSpring.core.dao.DaoOperation;
 import tp.appliSpring.core.entity.Client;
 import tp.appliSpring.core.entity.Compte;
+import tp.appliSpring.core.entity.Devise;
 import tp.appliSpring.core.entity.Operation;
+import tp.appliSpring.core.service.DeviseService;
 
 @Component
 @Profile("reInit")
@@ -27,6 +29,10 @@ public class ReInitDefaultDataSet {
 	
 	@Autowired
 	private DaoOperation daoOperation;
+	
+	@Autowired
+	DeviseService deviseService;
+
 	
 	@PostConstruct
 	public void initDataSet() {
@@ -42,6 +48,13 @@ public class ReInitDefaultDataSet {
 		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2a",80.0)));
 		client2.addCompte(this.daoCompte.save(new Compte(null,"compteC2b",60.0)));
 		client2 = daoClient.save(client2);
+		
+		Devise deviseEuro =  new Devise("EUR","euro",1.0);
+		deviseService.sauvegarderDevise(deviseEuro);
+		
+		deviseService.sauvegarderDevise(new Devise("USD","dollar",1.1));
+		deviseService.sauvegarderDevise(new Devise("GBP","livre",0.9));
+		deviseService.sauvegarderDevise(new Devise("JPY","yen",120.0));
 	}
 
 }

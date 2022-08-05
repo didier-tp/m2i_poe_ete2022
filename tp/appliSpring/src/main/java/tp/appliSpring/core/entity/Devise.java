@@ -26,10 +26,6 @@ public class Devise {
     @Column(name="echange")
     private Double change; //nb unité pour 1 euro
     
-    @OneToMany(mappedBy ="devise")
-    @JsonIgnore  //un peu comme @XmlTransient
-    private List<Pays> pays;
-    
     
 
 	public Devise(String code, String nom, Double change) {
