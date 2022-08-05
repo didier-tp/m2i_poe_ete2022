@@ -1,23 +1,16 @@
 package tp.appliSpring;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import tp.appliSpring.util.JwtAuthenticationFilter;
-import tp.appliSpring.util.MyNoAuthenticationEntryPoint;
-
-
+/*
+ * si ajout de spring-boot-starter-security dans pom.xml
+ * et aucune config de securité alors securité par defaut
+ * username=user
+ * mot_passe=a lire dans la console a chaque redémarrage de l'appli
+ */
 
 @Configuration
 @Profile("!withSecurity")
