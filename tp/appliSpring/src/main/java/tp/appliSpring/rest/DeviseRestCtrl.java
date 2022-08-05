@@ -1,5 +1,6 @@
 package tp.appliSpring.rest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tp.appliSpring.core.entity.Devise;
 import tp.appliSpring.core.service.DeviseService;
-import tp.appliSpring.delegate.RefreshDevise;
 import tp.appliSpring.dto.Currency;
-import tp.appliSpring.dto.DtoUtil;
 import tp.appliSpring.dto.MessageGenerique;
 
 
@@ -30,23 +29,15 @@ public class DeviseRestCtrl {
 	
 	private DeviseService deviseService;
 	
-	private RefreshDevise refreshDevise;//appel de WS externe pour refresh values in db
 
 	/*@Autowired*/
-	public DeviseRestCtrl(DeviseService deviseService,
-			              RefreshDevise refreshDevise) {
+	public DeviseRestCtrl(DeviseService deviseService) {
 		//injection de dépendance par constructeur
 		this.deviseService = deviseService;
-		this.refreshDevise=refreshDevise;
+	
 	}
 	 
-	
-	//http://localhost:8080/appliSpring/api-bank/devise-refresh
-	@GetMapping(value="/refresh")
-	public MessageGenerique refreshValues() {
-		List<Devise> devises = this.refreshDevise.refreshDeviseValuesInDataBase();
-		return new MessageGenerique("refresh ok",devises.toString());
-	}
+
 	
 	//RECHERCHE UNIQUE selon RESOURCE-ID:
 	//http://localhost:8080/appliSpring/api-bank/devise/EUR
@@ -64,7 +55,7 @@ public class DeviseRestCtrl {
 	//http://localhost:8080/appliSpring/api-bank/devise
 	@GetMapping(value="" )
 	public List<Currency> getDevisesByCriteria(){
-	    return DtoUtil.deviseListToCurrencyList(
+	    return deviseListToCurrencyList(
 	    		deviseService.rechercherToutesDevises());
 	}
 	
@@ -130,6 +121,13 @@ public class DeviseRestCtrl {
 			   }	   
 	}
 	
+	public static List<Currency> deviseListToCurrencyList(List<Devise> listeDevise){
+		List<Currency> listeCurrency = new ArrayList<>();
+		for(Devise d : listeDevise) {
+			listeCurrency.add(new Currency(d.getCode(),d.getNom(),d.getChange()));
+		}
+		return listeCurrency; 
+	}
 	
 
 }
