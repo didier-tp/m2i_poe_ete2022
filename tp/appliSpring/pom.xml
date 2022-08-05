@@ -96,6 +96,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<mainClass>tp.appliSpring.AppliSpringApplication</mainClass>
+		        	<layout>ZIP</layout> <!-- build jar with all dependencies -->
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
