@@ -3,6 +3,7 @@ package tp.appliSpring.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import tp.appliSpring.dto.CompteEssentiel;
 import tp.appliSpring.util_dto.DtoConverter;
 
 @RestController  //composant spring de type "RestController"
+//@CrossOrigin(origins = "*")
 @RequestMapping(value="/api-bank/compte" , headers="Accept=application/json")
 public class CompteRestCtrl {
 	
