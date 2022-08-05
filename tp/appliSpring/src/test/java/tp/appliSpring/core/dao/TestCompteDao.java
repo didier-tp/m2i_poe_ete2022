@@ -22,7 +22,7 @@ import tp.appliSpring.core.entity.Compte;
 @ExtendWith(SpringExtension.class) //si junit5/jupiter
 @SpringBootTest(classes= {AppliSpringApplication.class})
 //@ActiveProfiles({ "embeddedDB" })
-@ActiveProfiles({ "remoteDB" })
+@ActiveProfiles({ "remoteDB",  "dev" })
 public class TestCompteDao {
 	
     private static Logger logger = LoggerFactory.getLogger(TestCompteDao.class);
