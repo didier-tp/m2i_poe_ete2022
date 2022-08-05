@@ -19,7 +19,7 @@ import tp.appliSpring.dto.CompteEssentiel;
 import tp.appliSpring.util_dto.DtoConverter;
 
 @RestController  //composant spring de type "RestController"
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 @RequestMapping(value="/api-bank/compte" , headers="Accept=application/json")
 public class CompteRestCtrl {
 	
