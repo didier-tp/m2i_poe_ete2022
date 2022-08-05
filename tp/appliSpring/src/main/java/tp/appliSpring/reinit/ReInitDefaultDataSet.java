@@ -31,7 +31,7 @@ public class ReInitDefaultDataSet {
 	private DaoOperation daoOperation;
 	
 	@Autowired
-	DeviseService deviseService;
+	private DeviseService deviseService;
 
 	
 	@PostConstruct
