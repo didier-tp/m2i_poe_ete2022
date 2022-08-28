@@ -14,7 +14,8 @@ public class AppliSpringApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(AppliSpringApplication.class, args);
 		SpringApplication app = new SpringApplication(AppliSpringApplication.class);
-		app.setAdditionalProfiles("remoteDB","reInit","dev","withSecurity"); //EN PHASE DE DEV SEULEMENT et .bat en prod
+		//app.setAdditionalProfiles("remoteDB","reInit","dev","withSecurity"); //EN PHASE DE DEV SEULEMENT et .bat en prod
+		app.setAdditionalProfiles("embeddedDB","reInit","dev");
 		ConfigurableApplicationContext context = app.run(args);
 		
 		System.out.println("http://localhost:8080/appliSpring");

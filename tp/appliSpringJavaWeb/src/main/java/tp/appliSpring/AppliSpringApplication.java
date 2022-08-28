@@ -14,7 +14,8 @@ public class AppliSpringApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(AppliSpringApplication.class, args);
 		SpringApplication app = new SpringApplication(AppliSpringApplication.class);
-		app.setAdditionalProfiles("remoteDB","reInit");
+		//app.setAdditionalProfiles("remoteDB","reInit");
+		app.setAdditionalProfiles("embeddedDB","reInit");
 		ConfigurableApplicationContext context = app.run(args);
 		
 		System.out.println("http://localhost:8080/appliSpringJavaWeb");
