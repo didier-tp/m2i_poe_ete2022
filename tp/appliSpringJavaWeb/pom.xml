@@ -18,7 +18,28 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- windows/preferences/general/workspace / UTF8 avec eclipse coherent -->
 	</properties>
+	
+	<!--
+	<profiles>
+		<profile>
+	    <id>dev</id>
+	    <properties>
+	        <activatedProperties>embeddedDB,reInit2</activatedProperties>
+	    </properties>
+	    <activation>
+	        <activeByDefault>true</activeByDefault>
+	    </activation>
+		</profile>
+		<profile>
+		    <id>release</id>
+		    <properties>
+		        <activatedProperties>remoteDB</activatedProperties>
+		    </properties>
+		</profile>
+	</profiles>
+    -->
 
+<!--
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -30,7 +51,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+-->
 
 	<dependencies>
 
@@ -55,11 +76,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		<!--
 		<dependency>
 			<groupId>org.joinfaces</groupId>
 			<artifactId>primefaces-spring-boot-starter</artifactId>
-		<!-- et indirectement jsf-spring-boot-starter -->
 	</dependency>
+	-->
 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -91,6 +113,28 @@
 	</dependencies>
 
 	<build>
+	<!--
+	   <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+      </resources>
+	-->
+	   <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.4.0.905</version>
+            </plugin>
+        </plugins>
+      </pluginManagement>
+      <!-- 
+      mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin -Dsonar.password=admin123
+      puis regarder dans http://localhost:9000 com.m2i.appliSpringJavaWeb
+      -->
+	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

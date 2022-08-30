@@ -1,7 +1,7 @@
 package tp.appliSpring.web.mbean;
 
 import javax.annotation.ManagedBean;
-import javax.faces.bean.SessionScoped;
+//import javax.faces.bean.SessionScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +10,7 @@ import tp.appliSpring.core.service.ServiceClient;
 
 @ManagedBean
 //@RequestScoped
-@SessionScoped
+//@SessionScoped
 public class ClientBean {
 	
 	@Autowired

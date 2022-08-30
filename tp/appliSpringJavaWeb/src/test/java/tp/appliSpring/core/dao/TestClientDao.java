@@ -17,8 +17,8 @@ import tp.appliSpring.core.entity.Compte;
 
 //@ExtendWith(SpringExtension.class) //si junit5/jupiter
 @SpringBootTest(/*classes= {AppliSpringApplication.class}*/)
-//@ActiveProfiles({ "embeddedDB" }) //pour analyser le fichier application-embeddedDB.proporties (H2)
-@ActiveProfiles({ "remoteDB" }) //pour analyser le fichier application-remote.proporties (MySQL)
+@ActiveProfiles({ "embeddedDB" }) //pour analyser le fichier application-embeddedDB.proporties (H2)
+//@ActiveProfiles({ "remoteDB" }) //pour analyser le fichier application-remote.proporties (MySQL)
 public class TestClientDao {
 	
     private static Logger logger = LoggerFactory.getLogger(TestClientDao.class);

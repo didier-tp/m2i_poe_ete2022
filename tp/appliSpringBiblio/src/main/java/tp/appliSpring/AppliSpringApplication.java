@@ -14,12 +14,12 @@ public class AppliSpringApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(AppliSpringApplication.class, args);
 		SpringApplication app = new SpringApplication(AppliSpringApplication.class);
-		//app.setAdditionalProfiles("remoteDB","reInit");
-		//app.setAdditionalProfiles("embeddedDB","reInit");
+		 //EN PHASE DE DEV SEULEMENT et .bat en prod
+		app.setAdditionalProfiles("embeddedDB","reInit","dev");
 		ConfigurableApplicationContext context = app.run(args);
 		
-		System.out.println("http://localhost:8080/appliSpringJavaWeb");
-		//http://localhost:8080/appliSpring/index.html
+		System.out.println("http://localhost:8080/appliSpringBiblio");
+		//http://localhost:8080/appliSpringBiblio/index.html
 		// et index.html sera trouvé dans src/main/resources/static
 	}
 
