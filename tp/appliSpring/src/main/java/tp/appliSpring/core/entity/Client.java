@@ -33,7 +33,7 @@ public class Client {
 	private String nom;
 	//...
 	
-	@ManyToMany(/* fetch = FetchType.LAZY */) //Spring-Data impose LAZY et ignore EAGER
+	@ManyToMany(/*fetch = FetchType.LAZY */) //Spring-Data impose LAZY et ignore EAGER
 	@JoinTable(name = "CLIENT_COMPTE" ,
 	           joinColumns = { @JoinColumn(name="numClient") } ,
 	           inverseJoinColumns = { @JoinColumn(name="numCompte") } )

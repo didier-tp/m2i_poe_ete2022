@@ -35,4 +35,9 @@ public class DaoCompteSimu implements DaoCompte{
 		return new ArrayList<Compte>(mapComptes.values());
 	}
 
+	@Override
+	public void deleteById(Long numCpt) {
+		mapComptes.remove(numCpt);
+	}
+
 }

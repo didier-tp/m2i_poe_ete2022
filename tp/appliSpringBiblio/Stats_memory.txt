@@ -1,0 +1,2 @@
+démarre en environ 7s sur windows 11
+consomme au minimum 240Mo et assez rapidement environ 300Mo

@@ -18,8 +18,8 @@ import tp.appliSpring.core.entity.Compte;
 
 @ExtendWith(SpringExtension.class) //si junit5/jupiter
 @SpringBootTest
-//@ActiveProfiles({ "embeddedDB" })
-@ActiveProfiles({ "remoteDB" , "perf" , "dev" })
+@ActiveProfiles({ "embeddedDB" })
+//@ActiveProfiles({ "remoteDB" , "perf" , "dev" })
 public class TestServiceCompte {
 	
 	private static Logger logger = LoggerFactory.getLogger(TestServiceCompte.class);
